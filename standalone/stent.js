@@ -393,7 +393,7 @@ function handleGenerator(machine, generator, done, resultOfPreviousOperation) {
 
         var funcResult = func.apply(undefined, args);
 
-        if (!funcResult) {
+        if (typeof funcResult === 'undefined') {
           (0, _handleMiddleware2.default)(_constants.MIDDLEWARE_GENERATOR_RESUMED, machine);
           iterate(generatorNext(generator));
           return;

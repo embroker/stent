@@ -23,7 +23,7 @@ export default function handleGenerator(machine, generator, done, resultOfPrevio
         const { func, args } = result.value;
         const funcResult = func(...args);
 
-        if (!funcResult) {
+        if (typeof funcResult === 'undefined') {
           handleMiddleware(MIDDLEWARE_GENERATOR_RESUMED, machine);
           iterate(generatorNext(generator));
           return;

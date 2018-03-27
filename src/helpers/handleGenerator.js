@@ -30,7 +30,7 @@ export default function handleGenerator(machine, generator, done, resultOfPrevio
         }
         
         // promise
-        if (typeof funcResult.then !== 'undefined') {
+        if (funcResult && typeof funcResult.then !== 'undefined') {
           funcResult.then(
             result => {
               handleMiddleware(MIDDLEWARE_GENERATOR_RESUMED, machine, result);
@@ -42,7 +42,7 @@ export default function handleGenerator(machine, generator, done, resultOfPrevio
             }
           );
         // generator
-        } else if (typeof funcResult.next === 'function') {
+        } else if (funcResult && typeof funcResult.next === 'function') {
           try {
             cancelInsideGenerator = handleGenerator(machine, funcResult, generatorResult => {
               handleMiddleware(MIDDLEWARE_GENERATOR_RESUMED, machine, generatorResult);

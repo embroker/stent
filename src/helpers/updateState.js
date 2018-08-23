@@ -17,6 +17,10 @@ export default function updateState(machine, state) {
     newState = validateState(state);
   }
 
+  if (!newState.name) {
+    newState.name = machine.state.name;
+  }
+
   if (
     typeof machine.transitions[newState.name] === 'undefined' ||
     isEmptyObject(machine.transitions[newState.name])

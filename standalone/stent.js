@@ -592,6 +592,10 @@ function updateState(machine, state) {
     newState = (0, _validateState2.default)(state);
   }
 
+  if (!newState.name) {
+    newState.name = machine.state.name;
+  }
+
   if (typeof machine.transitions[newState.name] === 'undefined' || (0, _isEmptyObject2.default)(machine.transitions[newState.name])) {
     throw new Error((0, _constants.ERROR_UNCOVERED_STATE)(newState.name));
   }
@@ -634,15 +638,12 @@ exports.__esModule = true;
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 exports.default = validateState;
-
-var _constants = require('../constants');
-
 function validateState(state) {
-  if (state && (typeof state === 'undefined' ? 'undefined' : _typeof(state)) === 'object' && typeof state.name !== 'undefined') return state;
-  throw new Error((0, _constants.ERROR_WRONG_STATE_FORMAT)(state));
+  if (state && (typeof state === 'undefined' ? 'undefined' : _typeof(state)) === 'object') return state;
+  return {};
 }
 module.exports = exports['default'];
-},{"../constants":1}],15:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
